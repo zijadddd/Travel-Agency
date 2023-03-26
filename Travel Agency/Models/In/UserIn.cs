@@ -1,6 +1,6 @@
 ﻿namespace Travel_Agency.Models.In
 {
-    public class UserRegIn
+    public class UserIn
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
