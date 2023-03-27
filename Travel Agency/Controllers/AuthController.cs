@@ -49,7 +49,7 @@ namespace Travel_Agency.Controllers
         private string CreateToken(UserAuthInfo request) {
             List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, request.Username),
-                new Claim(ClaimTypes.Role, request.Role.Name)
+                new Claim(ClaimTypes.Role, request.Role.Name),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
