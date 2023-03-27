@@ -19,9 +19,7 @@ namespace Travel_Agency.Services.Implementations
         }
 
         public async Task<UserAuthInfo> Login(UserAuthInfoIn request) {
-            var users = await _databaseContext.UsersAuthInfo.Include(role => role.Role).Include(user => user.User).ToListAsync();
-            if (users == null) return null;
-            var user = users.Where(u => u.Username.Equals(request.Username)).FirstOrDefault();
+            var user = await _databaseContext.UsersAuthInfo.Where(user => user.Username.Equals(request.Username)).Include(role => role.Role).Include(user => user.User).FirstOrDefaultAsync();
             if (user == null) return null;
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.Password)) return null;
             return user;

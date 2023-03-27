@@ -42,6 +42,7 @@ namespace Travel_Agency.Controllers
             if (string.IsNullOrEmpty(request.Username)) return BadRequest("Username is missing.");
             if (string.IsNullOrEmpty (request.Password)) return BadRequest("Password is missing.");
             var user = await _authService.Login(request);
+            if (user == null) return NotFound("User is not found");
             string token = CreateToken(user);
             return token;
         }
