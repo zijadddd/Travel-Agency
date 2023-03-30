@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -12,6 +14,7 @@ namespace Travel_Agency.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AuthenticationPolicy")]
     public class AuthController : ControllerBase {
 
         private readonly IAuthService _authService;

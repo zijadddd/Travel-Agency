@@ -11,14 +11,29 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication().AddJwtBearer();
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddCors();
+
+builder.Services.AddCors(options => {
+    options.AddPolicy("AuthenticationPolicy",
+                  policy => {
+                      policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                  });
+    options.AddDefaultPolicy(
+                  policy => {
+                      policy.WithOrigins("http://localhost:3000").WithHeaders("Authorization").AllowAnyMethod();
+                  });
+});
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
