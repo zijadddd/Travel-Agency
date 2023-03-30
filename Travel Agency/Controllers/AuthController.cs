@@ -36,6 +36,7 @@ namespace Travel_Agency.Controllers
             if (string.IsNullOrEmpty(request.PhoneNumber)) return BadRequest("User phone number is missing.");
             if (string.IsNullOrEmpty(request.Role)) return BadRequest("User role is missing.");
             var user = await _authService.Register(request);
+            if (user == null) return BadRequest("Something isn't good.");
             return Ok(user);
         }
 
