@@ -82,7 +82,7 @@ const Login = () => {
                         Sign in
                     </button>
                     <p className="text-white mt-3">
-                        You dont have an account ?{' '}
+                        You don't have an account ?{' '}
                         <Link
                             className="text-danger"
                             aria-current="page"
