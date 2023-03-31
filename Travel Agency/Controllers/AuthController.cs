@@ -25,12 +25,13 @@ namespace Travel_Agency.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("register")]
+        [HttpPost("registration")]
         public async Task<ActionResult<UserOut>> Register(UserIn request) {
             if (request == null) return BadRequest("User in request does not exists.");
             if (string.IsNullOrEmpty(request.FirstName)) return BadRequest("User firstname is missing.");
             if (string.IsNullOrEmpty(request.LastName)) return BadRequest("User lastname is missing.");
             if (string.IsNullOrEmpty(request.Email)) return BadRequest("User email is missing.");
+            if (string.IsNullOrEmpty(request.Password)) return BadRequest("User password is missing.");
             if (string.IsNullOrEmpty(request.Address)) return BadRequest("User address is missing");
             if (string.IsNullOrEmpty(request.City)) return BadRequest("User city is missing");
             if (string.IsNullOrEmpty(request.PhoneNumber)) return BadRequest("User phone number is missing.");

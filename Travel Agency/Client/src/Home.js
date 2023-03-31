@@ -7,6 +7,8 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {}, [authState]);
+
+    return <div>Hello world</div>;
 };
 
 export default Home;
