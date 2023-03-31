@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 
 const Registration = () => {
     const [firstNameState, setFirstNameState] = useState({
@@ -38,24 +37,18 @@ const Registration = () => {
         error: false,
         value: '',
     });
-    const [showFirstNameErrorMessage, setShowFirstNameErrorMessage] = useState(
-        false
-    );
-    const [showLastNameErrorMessage, setShowLastNameErrorMessage] = useState(
-        false
-    );
+    const [showFirstNameErrorMessage, setShowFirstNameErrorMessage] =
+        useState(false);
+    const [showLastNameErrorMessage, setShowLastNameErrorMessage] =
+        useState(false);
     const [showEmailErrorMessage, setShowEmailErrorMessage] = useState(false);
-    const [showPasswordErrorMessage, setShowPasswordErrorMessage] = useState(
-        false
-    );
+    const [showPasswordErrorMessage, setShowPasswordErrorMessage] =
+        useState(false);
     const [showCityErrorMessage, setShowCityErrorMessage] = useState(false);
-    const [showAddressErrorMessage, setShowAddressErrorMessage] = useState(
-        false
-    );
-    const [
-        showPhoneNumberErrorMessage,
-        setShowPhoneNumberErrorMessage,
-    ] = useState(false);
+    const [showAddressErrorMessage, setShowAddressErrorMessage] =
+        useState(false);
+    const [showPhoneNumberErrorMessage, setShowPhoneNumberErrorMessage] =
+        useState(false);
 
     const navigate = useNavigate();
 
@@ -200,7 +193,8 @@ const Registration = () => {
                         {showFirstNameErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span> first name. Example: John
+                                <span className="text-danger">valid</span> first
+                                name. Example: John
                             </p>
                         )}
                     </div>
@@ -222,7 +216,8 @@ const Registration = () => {
                         {showLastNameErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span> last name. Example: Smith
+                                <span className="text-danger">valid</span> last
+                                name. Example: Smith
                             </p>
                         )}
                     </div>
@@ -244,7 +239,8 @@ const Registration = () => {
                         {showEmailErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span> email address. Example: johnsmith@gmail.com
+                                <span className="text-danger">valid</span> email
+                                address. Example: johnsmith@gmail.com
                             </p>
                         )}
                     </div>
@@ -266,7 +262,10 @@ const Registration = () => {
                         {showPasswordErrorMessage && (
                             <p className="text-white errorMessage">
                                 Your password need to be at least{' '}
-                                <span className="text-danger">8 characters</span> long.
+                                <span className="text-danger">
+                                    8 characters
+                                </span>{' '}
+                                long.
                             </p>
                         )}
                     </div>
@@ -288,7 +287,8 @@ const Registration = () => {
                         {showCityErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span> city name. Example: New York
+                                <span className="text-danger">valid</span> city
+                                name. Example: New York
                             </p>
                         )}
                     </div>
@@ -310,7 +310,8 @@ const Registration = () => {
                         {showAddressErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span> address. Example: Time Square bb
+                                <span className="text-danger">valid</span>{' '}
+                                address. Example: Time Square bb
                             </p>
                         )}
                     </div>
@@ -332,7 +333,8 @@ const Registration = () => {
                         {showPhoneNumberErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span> phone number. Example: 0603456981
+                                <span className="text-danger">valid</span> phone
+                                number. Example: 0603456981
                             </p>
                         )}
                     </div>
