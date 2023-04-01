@@ -33,10 +33,6 @@ const Registration = () => {
         error: false,
         value: '',
     });
-    const [roleState, setRoleState] = useState({
-        error: false,
-        value: '',
-    });
     const [showFirstNameErrorMessage, setShowFirstNameErrorMessage] =
         useState(false);
     const [showLastNameErrorMessage, setShowLastNameErrorMessage] =
@@ -49,6 +45,10 @@ const Registration = () => {
         useState(false);
     const [showPhoneNumberErrorMessage, setShowPhoneNumberErrorMessage] =
         useState(false);
+    const [alertMessageState, setAlertMessageState] = useState({
+        message: '',
+        visible: false,
+    });
 
     const navigate = useNavigate();
 
@@ -113,10 +113,6 @@ const Registration = () => {
             setShowPhoneNumberErrorMessage(false);
     };
 
-    const handleRole = () => {
-        setRoleState('User');
-    };
-
     const handleFirstNameBlur = () => {
         if (firstNameState.error) setShowFirstNameErrorMessage(true);
     };
@@ -147,17 +143,94 @@ const Registration = () => {
 
     const registration = async (event) => {
         event.preventDefault();
-        handleRole();
+        if (firstNameState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid first name.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
+        if (lastNameState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid last name.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
+        if (emailState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid email.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
+        if (passwordState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid password.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
+        if (cityState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid city name.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
+        if (addressState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid address.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
+        if (phoneNumberState.error) {
+            setAlertMessageState({
+                message: 'You need to enter valid phone number.',
+                visible: true,
+            });
+            setTimeout(
+                () => setAlertMessageState({ message: '', visible: false }),
+                3000
+            );
+            return;
+        }
         let data = {
-            firstName: firstNameState,
-            lastName: lastNameState,
-            email: emailState,
-            password: passwordState,
-            address: addressState,
-            city: cityState,
-            phoneNumber: phoneNumberState,
-            role: roleState,
+            firstName: firstNameState.value,
+            lastName: lastNameState.value,
+            email: emailState.value,
+            password: passwordState.value,
+            city: cityState.value,
+            address: addressState.value,
+            phoneNumber: phoneNumberState.value,
+            role: 'User',
         };
+        console.log(data);
         axios
             .post('https://localhost:7023/api/Auth/registration', data)
             .then((response) => {
@@ -338,6 +411,14 @@ const Registration = () => {
                             </p>
                         )}
                     </div>
+                    {alertMessageState.visible ? (
+                        <p className="text-white errorMessage">
+                            <span className="text-danger">WARNING: </span>{' '}
+                            {alertMessageState.message}
+                        </p>
+                    ) : (
+                        <></>
+                    )}
                     <button type="submit" className="btn btn-danger">
                         Sign in
                     </button>
