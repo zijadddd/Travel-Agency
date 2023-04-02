@@ -53,7 +53,7 @@ const Registration = () => {
     const navigate = useNavigate();
 
     const handleFirstName = (event) => {
-        const regex = /^[A-Z][a-z0-9_-]{3,19}$/;
+        const regex = /^[A-Z][a-z]+$/;
         const value = event.target.value;
         const isFirstNameValid = regex.test(value);
         setFirstNameState({ value, error: !isFirstNameValid });
@@ -62,7 +62,7 @@ const Registration = () => {
     };
 
     const handleLastName = (event) => {
-        const regex = /^[A-Z][a-z0-9_-]{3,19}$/;
+        const regex = /^[A-Z][a-z]+(-[A-Z][a-z]+)*$/;
         const value = event.target.value;
         const isLastNameValid = regex.test(value);
         setLastNameState({ value, error: !isLastNameValid });
@@ -71,7 +71,7 @@ const Registration = () => {
     };
 
     const handleEmail = (event) => {
-        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const regex = /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
         const value = event.target.value;
         const isEmailValid = regex.test(value);
         setEmailState({ value, error: !isEmailValid });
@@ -80,15 +80,17 @@ const Registration = () => {
     };
 
     const handlePassword = (event) => {
+        const regex =
+            /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         const value = event.target.value;
-        const isPasswordValid = value.length >= 8 ? true : false;
+        const isPasswordValid = regex.test(value);
         setPasswordState({ value, error: !isPasswordValid });
         if (showPasswordErrorMessage && isPasswordValid)
             setShowPasswordErrorMessage(false);
     };
 
     const handleCity = (event) => {
-        const regex = /^[A-Z]\s*[a-zA-Z]{1}[0-9a-zA-Z][0-9a-zA-Z '-.=#/]*$/;
+        const regex = /^[A-Z][a-z]+(?:[\s-][A-Z][a-z]+)*$/;
         const value = event.target.value;
         const isCityValid = regex.test(value);
         setCityState({ value, error: !isCityValid });
@@ -96,7 +98,7 @@ const Registration = () => {
     };
 
     const handleAddress = (event) => {
-        const regex = /^[A-Z]\s*[a-zA-Z]{1}[0-9a-zA-Z][0-9a-zA-Z '-.=#/]*$/;
+        const regex = /^[A-Z][\p{L}\d\s.,-]*$/u;
         const value = event.target.value;
         const isAddressValid = regex.test(value);
         setAddressState({ value, error: !isAddressValid });
@@ -105,7 +107,7 @@ const Registration = () => {
     };
 
     const handlePhoneNumber = (event) => {
-        const regex = /^\d{10}$/;
+        const regex = /^(\+?\d{1,3}\s)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{3,4}$/;
         const value = event.target.value;
         const isPhoneNumberValid = regex.test(value);
         setPhoneNumberState({ value, error: !isPhoneNumberValid });
@@ -246,7 +248,7 @@ const Registration = () => {
                 <span className="text-danger">T</span>ravel agency
             </h1>
             <div className="mainDiv__child d-flex flex-column m-3">
-                <h2 className="text-white">Sign in</h2>
+                <h2 className="text-white">Sign up</h2>
                 <form onSubmit={registration}>
                     <div className="mb-3">
                         <label
@@ -334,11 +336,14 @@ const Registration = () => {
                         />
                         {showPasswordErrorMessage && (
                             <p className="text-white errorMessage">
-                                Your password need to be at least{' '}
-                                <span className="text-danger">
-                                    8 characters
-                                </span>{' '}
-                                long.
+                                The password should consist of at least{' '}
+                                <span className="text-danger">8 letters</span>,
+                                al least{' '}
+                                <span className="text-danger">one capital</span>{' '}
+                                letter, <span className="text-danger">one</span>{' '}
+                                number and{' '}
+                                <span className="text-danger">one special</span>{' '}
+                                character. Example: Abc123!@
                             </p>
                         )}
                     </div>
@@ -383,7 +388,7 @@ const Registration = () => {
                         {showAddressErrorMessage && (
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
-                                <span className="text-danger">valid</span>{' '}
+                                <span className="text-danger">valid</span> home
                                 address. Example: Time Square bb
                             </p>
                         )}
@@ -407,7 +412,8 @@ const Registration = () => {
                             <p className="text-white errorMessage">
                                 Please enter a{' '}
                                 <span className="text-danger">valid</span> phone
-                                number. Example: 0603456981
+                                number. Examples: +1 (123) 456-7890,
+                                555-555-1234, +44 1234567890, 123-456-789
                             </p>
                         )}
                     </div>
