@@ -4,6 +4,7 @@ using Travel_Agency.Data;
 using Travel_Agency.Services;
 using Travel_Agency.Services.Implementations;
 using Microsoft.IdentityModel.Tokens;
+using Travel_Agency.Models.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICRUDService<TravelRoute>, TravelRoutesService>();
 builder.Services.AddCors();
 
 builder.Services.AddCors(options => {
@@ -35,7 +37,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-
     app.UseSwagger();
     app.UseSwaggerUI();
 }

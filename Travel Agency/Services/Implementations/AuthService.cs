@@ -52,17 +52,17 @@ namespace Travel_Agency.Services.Implementations
             _databaseContext.UsersAuthInfo.Add(userAuthInfo);
             await _databaseContext.SaveChangesAsync();
 
-            UserOut userOut = new UserOut {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Password = userAuthInfo.Password,
-                Address = user.Address,
-                City = user.City,
-                PhoneNumber = user.PhoneNumber,
-                Role = userAuthInfo.Role.Name
-            };
+            UserOut userOut = new UserOut(
+                user.Id,
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                userAuthInfo.Password,
+                user.Address,
+                user.City,
+                user.PhoneNumber,
+                userAuthInfo.Role.Name
+            );
             return userOut;
         }
     }
