@@ -1,8 +1,14 @@
 ﻿namespace Travel_Agency.Models.In
 {
-    public class UserAuthInfoIn
+    public record UserAuthInfoIn
     {
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public UserAuthInfoIn(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+
+        public string Username { get; init; }
+        public string Password { get; init; }
     }
 }

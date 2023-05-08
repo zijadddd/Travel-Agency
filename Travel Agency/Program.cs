@@ -11,12 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+
+builder.Services.AddAuthentication().AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters {
         NameClaimType = "username",
         RoleClaimType = "role"
     };
 });
+
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICRUDService<TravelRoute>, TravelRoutesService>();
@@ -25,11 +27,11 @@ builder.Services.AddCors();
 builder.Services.AddCors(options => {
     options.AddPolicy("AuthenticationPolicy",
                   policy => {
-                      policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                      policy.WithOrigins("http://localhost:5555").AllowAnyHeader().AllowAnyMethod();
                   });
     options.AddDefaultPolicy(
                   policy => {
-                      policy.WithOrigins("http://localhost:3000").WithHeaders("Authorization").AllowAnyMethod();
+                      policy.WithOrigins("http://localhost:5555").WithHeaders("Authorization").AllowAnyMethod();
                   });
 });
 

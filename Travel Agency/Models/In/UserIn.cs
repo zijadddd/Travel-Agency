@@ -1,14 +1,26 @@
 ﻿namespace Travel_Agency.Models.In
 {
-    public class UserIn
+    public record UserIn
     {
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        public string Address { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty;
+        public UserIn(string firstName, string lastName, string email, string password, string city, string address, string phoneNumber, string role)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            City = city;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            Role = role;
+        }
+
+        public string FirstName { get; init; }
+        public string LastName { get; init; }
+        public string Email { get; init; }
+        public string Password { get; init; }
+        public string City { get; init; }
+        public string Address { get; init; }
+        public string PhoneNumber { get; init; }
+        public string Role { get; init; }
     }
 }
