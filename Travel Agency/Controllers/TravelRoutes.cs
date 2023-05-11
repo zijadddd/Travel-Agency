@@ -12,10 +12,5 @@ namespace Travel_Agency.Controllers {
         {
             _travelRouteService = travelRouteService;
         }
-
-        [HttpGet]
-        public async Task<ActionResult<string>> nestoVrati() {
-            return "Hahahaha";
-        }
     }
 }

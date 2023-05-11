@@ -6,7 +6,7 @@ namespace Travel_Agency.Services
 {
     public interface IAuthService
     {
-        Task<UserOut> Register(UserIn request);
-        Task<UserAuthInfo> Login(UserAuthInfoIn request);
+        Task<dynamic> Register(UserIn request);
+        Task<dynamic> Login(UserAuthInfoIn request);
     }
 }
