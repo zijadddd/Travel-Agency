@@ -21,6 +21,7 @@ namespace Travel_Agency.Controllers
 
         [HttpPost("registration")]
         public async Task<ActionResult<UserOut>> Register(UserIn request) {
+            if (request == null) return BadRequest("User informations for signing up does not exist in request.");
             var response = await _authService.Register(request);
             if (response.GetType() != typeof(UserOut) && response.GetType() == typeof(string)) return BadRequest(response);
             else if (response == null) return BadRequest("Something isn't good.");
