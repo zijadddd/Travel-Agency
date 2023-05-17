@@ -12,7 +12,10 @@ namespace Travel_Agency.Data
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserAuthInfo> UsersAuthInfo { get; set; }   
+        public DbSet<UserAuthInfo> UsersAuthInfo { get; set; }  
+        public DbSet<TravelRoute> TravelRoutes { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
     }
 }

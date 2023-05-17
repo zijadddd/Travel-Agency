@@ -22,6 +22,8 @@ builder.Services.AddAuthentication().AddJwtBearer(options => {
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICRUDService<TravelRoute>, TravelRoutesService>();
+builder.Services.AddScoped<ICRUDService<Ticket>, TicketService>();
+builder.Services.AddScoped<ICRUDService<Vehicle>, VehicleService>();
 builder.Services.AddCors();
 
 builder.Services.AddCors(options => {
