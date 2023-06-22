@@ -5,15 +5,15 @@ namespace Travel_Agency.Models.Out {
 
         public UserOut(int id, string firstName, string lastName, string email, string password, string address, string city, string phoneNumber, string role)
         {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            Address = address;
-            City = city;
-            PhoneNumber = phoneNumber;
-            Role = role;
+            this.Id = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = email;
+            this.Password = password;
+            this.Address = address;
+            this.City = city;
+            this.PhoneNumber = phoneNumber;
+            this.Role = role;
         }
 
         public int Id { get; init; }

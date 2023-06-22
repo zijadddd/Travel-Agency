@@ -1,8 +1,8 @@
 ﻿using Travel_Agency.Data;
-using Travel_Agency.Models.Entities;
+using Travel_Agency.Models.In;
 
 namespace Travel_Agency.Services.Implementations {
-    public class TravelRoutesService : ICRUDService<TravelRoute> {
+    public class TravelRoutesService : ICRUDService<TravelRouteIn> {
         private readonly DatabaseContext _databaseContext;
 
         public TravelRoutesService(DatabaseContext databaseContext)
@@ -10,19 +10,23 @@ namespace Travel_Agency.Services.Implementations {
             _databaseContext = databaseContext;
         }
 
-        public Task<TravelRoute> Create(TravelRoute value) {
+        public Task<dynamic> Create(TravelRouteIn value)
+        {
             throw new NotImplementedException();
         }
 
-        public Task<TravelRoute> Delete(TravelRoute value) {
+        public Task<dynamic> Read(TravelRouteIn value)
+        {
             throw new NotImplementedException();
         }
 
-        public Task<TravelRoute> Read(TravelRoute value) {
+        public Task<dynamic> Update(TravelRouteIn value)
+        {
             throw new NotImplementedException();
         }
 
-        public Task<TravelRoute> Update(TravelRoute value) {
+        public Task<dynamic> Delete(TravelRouteIn value)
+        {
             throw new NotImplementedException();
         }
     }

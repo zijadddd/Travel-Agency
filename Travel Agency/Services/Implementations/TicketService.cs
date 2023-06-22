@@ -1,20 +1,24 @@
-﻿using Travel_Agency.Models.Entities;
+﻿using Travel_Agency.Models.In;
 
 namespace Travel_Agency.Services.Implementations {
-    public class TicketService : ICRUDService<Ticket> {
-        public Task<Ticket> Create(Ticket value) {
+    public class TicketService : ICRUDService<TicketIn> {
+        public Task<dynamic> Create(TicketIn value)
+        {
             throw new NotImplementedException();
         }
 
-        public Task<Ticket> Delete(Ticket value) {
+        public Task<dynamic> Read(TicketIn value)
+        {
             throw new NotImplementedException();
         }
 
-        public Task<Ticket> Read(Ticket value) {
+        public Task<dynamic> Update(TicketIn value)
+        {
             throw new NotImplementedException();
         }
 
-        public Task<Ticket> Update(Ticket value) {
+        public Task<dynamic> Delete(TicketIn value)
+        {
             throw new NotImplementedException();
         }
     }

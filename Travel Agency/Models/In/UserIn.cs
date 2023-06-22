@@ -4,14 +4,14 @@
     {
         public UserIn(string firstName, string lastName, string email, string password, string city, string address, string phoneNumber, string role)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            City = city;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            Role = role;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = email;
+            this.Password = password;
+            this.City = city;
+            this.Address = address;
+            this.PhoneNumber = phoneNumber;
+            this.Role = role;
         }
 
         public string FirstName { get; init; }

@@ -14,8 +14,8 @@ namespace Travel_Agency.Utilities {
 
         public static async Task<string> CreateTokenAsync(UserAuthInfo request) {
             List<Claim> claims = new List<Claim> {
-                new Claim("username", request.Username),
-                new Claim("role", request.Role.Name),
+                new Claim(ClaimTypes.Name, request.Username),
+                new Claim(ClaimTypes.Role, request.Role.Name),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));

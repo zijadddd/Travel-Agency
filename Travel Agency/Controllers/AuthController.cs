@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Travel_Agency.Models.Entities;
 using Travel_Agency.Models.In;
@@ -19,7 +20,7 @@ namespace Travel_Agency.Controllers
             _authService = authService;
         }
 
-        [HttpPost("registration")]
+        [HttpPost("registration"), AllowAnonymous]
         public async Task<ActionResult<UserOut>> Register(UserIn request) {
             if (request == null) return BadRequest("User informations for signing up does not exist in request.");
             var response = await _authService.Register(request);
@@ -28,7 +29,7 @@ namespace Travel_Agency.Controllers
             else return Ok(response);
         }
 
-        [HttpPost("login")]
+        [HttpPost("login"), AllowAnonymous]
         public async Task<ActionResult<string>> Login(UserAuthInfoIn request) {
             if (request == null) return BadRequest("User authentication info does not exist in request.");
             var response = await _authService.Login(request);

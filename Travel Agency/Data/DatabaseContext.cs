@@ -16,6 +16,11 @@ namespace Travel_Agency.Data
         public DbSet<TravelRoute> TravelRoutes { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Ticket>().HasNoKey();
+        }
 
     }
 }

@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Travel_Agency.Data;
 using Travel_Agency.Services;
 using Travel_Agency.Services.Implementations;
 using Microsoft.IdentityModel.Tokens;
-using Travel_Agency.Models.Entities;
+using Travel_Agency.Models.In;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,30 +13,32 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication().AddJwtBearer(options => {
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters {
-        NameClaimType = "username",
-        RoleClaimType = "role"
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+        ValidateIssuer = false,
+        ValidateAudience = false
     };
 });
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ICRUDService<TravelRoute>, TravelRoutesService>();
-builder.Services.AddScoped<ICRUDService<Ticket>, TicketService>();
-builder.Services.AddScoped<ICRUDService<Vehicle>, VehicleService>();
-builder.Services.AddCors();
-
 builder.Services.AddCors(options => {
-    options.AddPolicy("AuthenticationPolicy",
+    options.AddPolicy(name: "AuthenticationPolicy",
                   policy => {
-                      policy.WithOrigins("http://localhost:5555").AllowAnyHeader().AllowAnyMethod();
+                      policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                   });
     options.AddDefaultPolicy(
                   policy => {
-                      policy.WithOrigins("http://localhost:5555").WithHeaders("Authorization").AllowAnyMethod();
+                      policy.AllowAnyOrigin().WithHeaders("Authorization").AllowAnyMethod();
                   });
-});
+}); 
+
+
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICRUDService<TravelRouteIn>, TravelRoutesService>();
+builder.Services.AddScoped<ICRUDService<TicketIn>, TicketService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 var app = builder.Build();
 

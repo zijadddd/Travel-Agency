@@ -1,17 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Travel_Agency.Models.Entities;
+using Travel_Agency.Models.Out;
 using Travel_Agency.Services;
 
 namespace Travel_Agency.Controllers {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
     public class VehicleController : ControllerBase {
-        private readonly ICRUDService<Vehicle> _vehicleService;
+        private readonly IVehicleService _vehicleService;
 
-        public VehicleController(ICRUDService<Vehicle> vehicleService)
+        public VehicleController(IVehicleService vehicleService)
         {
             _vehicleService = vehicleService;
+        }
+
+        [HttpGet, Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<List<VehicleOut>>> GetVehicles()
+        {
+            var response = await _vehicleService.Read();
+            if (response.GetType() is not List<VehicleOut>) return NotFound(response);
+            return Ok(response);
         }
     }
 }
