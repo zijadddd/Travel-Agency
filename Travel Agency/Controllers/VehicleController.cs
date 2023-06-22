@@ -7,7 +7,6 @@ using Travel_Agency.Services;
 namespace Travel_Agency.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors]
     public class VehicleController : ControllerBase {
         private readonly IVehicleService _vehicleService;
 
